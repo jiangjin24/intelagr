@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BCompanycomplaintMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BCompanycomplaint" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ComplaintDate" property="complaintdate" jdbcType="TIMESTAMP" />
+    <result column="Complainant" property="complainant" jdbcType="VARCHAR" />
+    <result column="ComplainantSex" property="complainantsex" jdbcType="VARCHAR" />
+    <result column="ComplainantTel" property="complainanttel" jdbcType="VARCHAR" />
+    <result column="ComplainantMail" property="complainantmail" jdbcType="VARCHAR" />
+    <result column="ComplaintContent" property="complaintcontent" jdbcType="VARCHAR" />
+    <result column="SettleStatus" property="settlestatus" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+    <result column="ProcessMode" property="processmode" jdbcType="VARCHAR" />
+    <result column="ProcessResult" property="processresult" jdbcType="VARCHAR" />
+    <result column="BlackListTimeLimit" property="blacklisttimelimit" jdbcType="VARCHAR" />
+    <result column="BlackListEndDate" property="blacklistenddate" jdbcType="TIMESTAMP" />
+    <result column="ProductionBatch" property="productionbatch" jdbcType="VARCHAR" />
+    <result column="ProductCode" property="productcode" jdbcType="VARCHAR" />
+    <result column="RejectReason" property="rejectreason" jdbcType="VARCHAR" />
+    <result column="SettleDate" property="settledate" jdbcType="TIMESTAMP" />
+    <result column="Processor" property="processor" jdbcType="VARCHAR" />
+    <result column="ProcessorsTel" property="processorstel" jdbcType="VARCHAR" />
+    <result column="ProcessorsMail" property="processorsmail" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ComplaintDate, Complainant, ComplainantSex, ComplainantTel, ComplainantMail, 
+    ComplaintContent, SettleStatus, CompanyCode, ProcessMode, ProcessResult, BlackListTimeLimit, 
+    BlackListEndDate, ProductionBatch, ProductCode, RejectReason, SettleDate, Processor, 
+    ProcessorsTel, ProcessorsMail, Remark, DeleteFlag, CreateUserId, CreateDate, UpdateUserId, 
+    UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BCompanycomplaintExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_companycomplaint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_companycomplaint
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_companycomplaint
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BCompanycomplaintExample" >
+    delete from b_companycomplaint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BCompanycomplaint" >
+    insert into b_companycomplaint (ID, ComplaintDate, Complainant, 
+      ComplainantSex, ComplainantTel, ComplainantMail, 
+      ComplaintContent, SettleStatus, CompanyCode, 
+      ProcessMode, ProcessResult, BlackListTimeLimit, 
+      BlackListEndDate, ProductionBatch, ProductCode, 
+      RejectReason, SettleDate, Processor, 
+      ProcessorsTel, ProcessorsMail, Remark, 
+      DeleteFlag, CreateUserId, CreateDate, 
+      UpdateUserId, UpdateDate)
+    values (#{id,jdbcType=INTEGER}, #{complaintdate,jdbcType=TIMESTAMP}, #{complainant,jdbcType=VARCHAR}, 
+      #{complainantsex,jdbcType=VARCHAR}, #{complainanttel,jdbcType=VARCHAR}, #{complainantmail,jdbcType=VARCHAR}, 
+      #{complaintcontent,jdbcType=VARCHAR}, #{settlestatus,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}, 
+      #{processmode,jdbcType=VARCHAR}, #{processresult,jdbcType=VARCHAR}, #{blacklisttimelimit,jdbcType=VARCHAR}, 
+      #{blacklistenddate,jdbcType=TIMESTAMP}, #{productionbatch,jdbcType=VARCHAR}, #{productcode,jdbcType=VARCHAR}, 
+      #{rejectreason,jdbcType=VARCHAR}, #{settledate,jdbcType=TIMESTAMP}, #{processor,jdbcType=VARCHAR}, 
+      #{processorstel,jdbcType=VARCHAR}, #{processorsmail,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BCompanycomplaint" >
+    insert into b_companycomplaint
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="complaintdate != null" >
+        ComplaintDate,
+      </if>
+      <if test="complainant != null" >
+        Complainant,
+      </if>
+      <if test="complainantsex != null" >
+        ComplainantSex,
+      </if>
+      <if test="complainanttel != null" >
+        ComplainantTel,
+      </if>
+      <if test="complainantmail != null" >
+        ComplainantMail,
+      </if>
+      <if test="complaintcontent != null" >
+        ComplaintContent,
+      </if>
+      <if test="settlestatus != null" >
+        SettleStatus,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+      <if test="processmode != null" >
+        ProcessMode,
+      </if>
+      <if test="processresult != null" >
+        ProcessResult,
+      </if>
+      <if test="blacklisttimelimit != null" >
+        BlackListTimeLimit,
+      </if>
+      <if test="blacklistenddate != null" >
+        BlackListEndDate,
+      </if>
+      <if test="productionbatch != null" >
+        ProductionBatch,
+      </if>
+      <if test="productcode != null" >
+        ProductCode,
+      </if>
+      <if test="rejectreason != null" >
+        RejectReason,
+      </if>
+      <if test="settledate != null" >
+        SettleDate,
+      </if>
+      <if test="processor != null" >
+        Processor,
+      </if>
+      <if test="processorstel != null" >
+        ProcessorsTel,
+      </if>
+      <if test="processorsmail != null" >
+        ProcessorsMail,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="complaintdate != null" >
+        #{complaintdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="complainant != null" >
+        #{complainant,jdbcType=VARCHAR},
+      </if>
+      <if test="complainantsex != null" >
+        #{complainantsex,jdbcType=VARCHAR},
+      </if>
+      <if test="complainanttel != null" >
+        #{complainanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="complainantmail != null" >
+        #{complainantmail,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintcontent != null" >
+        #{complaintcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="settlestatus != null" >
+        #{settlestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="processmode != null" >
+        #{processmode,jdbcType=VARCHAR},
+      </if>
+      <if test="processresult != null" >
+        #{processresult,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklisttimelimit != null" >
+        #{blacklisttimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistenddate != null" >
+        #{blacklistenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productionbatch != null" >
+        #{productionbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectreason != null" >
+        #{rejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="settledate != null" >
+        #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processor != null" >
+        #{processor,jdbcType=VARCHAR},
+      </if>
+      <if test="processorstel != null" >
+        #{processorstel,jdbcType=VARCHAR},
+      </if>
+      <if test="processorsmail != null" >
+        #{processorsmail,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BCompanycomplaintExample" resultType="java.lang.Integer" >
+    select count(*) from b_companycomplaint
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_companycomplaint
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.complaintdate != null" >
+        ComplaintDate = #{record.complaintdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.complainant != null" >
+        Complainant = #{record.complainant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.complainantsex != null" >
+        ComplainantSex = #{record.complainantsex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.complainanttel != null" >
+        ComplainantTel = #{record.complainanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.complainantmail != null" >
+        ComplainantMail = #{record.complainantmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.complaintcontent != null" >
+        ComplaintContent = #{record.complaintcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settlestatus != null" >
+        SettleStatus = #{record.settlestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companycode != null" >
+        CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processmode != null" >
+        ProcessMode = #{record.processmode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processresult != null" >
+        ProcessResult = #{record.processresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blacklisttimelimit != null" >
+        BlackListTimeLimit = #{record.blacklisttimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blacklistenddate != null" >
+        BlackListEndDate = #{record.blacklistenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.productionbatch != null" >
+        ProductionBatch = #{record.productionbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productcode != null" >
+        ProductCode = #{record.productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rejectreason != null" >
+        RejectReason = #{record.rejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settledate != null" >
+        SettleDate = #{record.settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.processor != null" >
+        Processor = #{record.processor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processorstel != null" >
+        ProcessorsTel = #{record.processorstel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processorsmail != null" >
+        ProcessorsMail = #{record.processorsmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_companycomplaint
+    set ID = #{record.id,jdbcType=INTEGER},
+      ComplaintDate = #{record.complaintdate,jdbcType=TIMESTAMP},
+      Complainant = #{record.complainant,jdbcType=VARCHAR},
+      ComplainantSex = #{record.complainantsex,jdbcType=VARCHAR},
+      ComplainantTel = #{record.complainanttel,jdbcType=VARCHAR},
+      ComplainantMail = #{record.complainantmail,jdbcType=VARCHAR},
+      ComplaintContent = #{record.complaintcontent,jdbcType=VARCHAR},
+      SettleStatus = #{record.settlestatus,jdbcType=VARCHAR},
+      CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      ProcessMode = #{record.processmode,jdbcType=VARCHAR},
+      ProcessResult = #{record.processresult,jdbcType=VARCHAR},
+      BlackListTimeLimit = #{record.blacklisttimelimit,jdbcType=VARCHAR},
+      BlackListEndDate = #{record.blacklistenddate,jdbcType=TIMESTAMP},
+      ProductionBatch = #{record.productionbatch,jdbcType=VARCHAR},
+      ProductCode = #{record.productcode,jdbcType=VARCHAR},
+      RejectReason = #{record.rejectreason,jdbcType=VARCHAR},
+      SettleDate = #{record.settledate,jdbcType=TIMESTAMP},
+      Processor = #{record.processor,jdbcType=VARCHAR},
+      ProcessorsTel = #{record.processorstel,jdbcType=VARCHAR},
+      ProcessorsMail = #{record.processorsmail,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BCompanycomplaint" >
+    update b_companycomplaint
+    <set >
+      <if test="complaintdate != null" >
+        ComplaintDate = #{complaintdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="complainant != null" >
+        Complainant = #{complainant,jdbcType=VARCHAR},
+      </if>
+      <if test="complainantsex != null" >
+        ComplainantSex = #{complainantsex,jdbcType=VARCHAR},
+      </if>
+      <if test="complainanttel != null" >
+        ComplainantTel = #{complainanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="complainantmail != null" >
+        ComplainantMail = #{complainantmail,jdbcType=VARCHAR},
+      </if>
+      <if test="complaintcontent != null" >
+        ComplaintContent = #{complaintcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="settlestatus != null" >
+        SettleStatus = #{settlestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="processmode != null" >
+        ProcessMode = #{processmode,jdbcType=VARCHAR},
+      </if>
+      <if test="processresult != null" >
+        ProcessResult = #{processresult,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklisttimelimit != null" >
+        BlackListTimeLimit = #{blacklisttimelimit,jdbcType=VARCHAR},
+      </if>
+      <if test="blacklistenddate != null" >
+        BlackListEndDate = #{blacklistenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productionbatch != null" >
+        ProductionBatch = #{productionbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        ProductCode = #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectreason != null" >
+        RejectReason = #{rejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="settledate != null" >
+        SettleDate = #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="processor != null" >
+        Processor = #{processor,jdbcType=VARCHAR},
+      </if>
+      <if test="processorstel != null" >
+        ProcessorsTel = #{processorstel,jdbcType=VARCHAR},
+      </if>
+      <if test="processorsmail != null" >
+        ProcessorsMail = #{processorsmail,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BCompanycomplaint" >
+    update b_companycomplaint
+    set ComplaintDate = #{complaintdate,jdbcType=TIMESTAMP},
+      Complainant = #{complainant,jdbcType=VARCHAR},
+      ComplainantSex = #{complainantsex,jdbcType=VARCHAR},
+      ComplainantTel = #{complainanttel,jdbcType=VARCHAR},
+      ComplainantMail = #{complainantmail,jdbcType=VARCHAR},
+      ComplaintContent = #{complaintcontent,jdbcType=VARCHAR},
+      SettleStatus = #{settlestatus,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR},
+      ProcessMode = #{processmode,jdbcType=VARCHAR},
+      ProcessResult = #{processresult,jdbcType=VARCHAR},
+      BlackListTimeLimit = #{blacklisttimelimit,jdbcType=VARCHAR},
+      BlackListEndDate = #{blacklistenddate,jdbcType=TIMESTAMP},
+      ProductionBatch = #{productionbatch,jdbcType=VARCHAR},
+      ProductCode = #{productcode,jdbcType=VARCHAR},
+      RejectReason = #{rejectreason,jdbcType=VARCHAR},
+      SettleDate = #{settledate,jdbcType=TIMESTAMP},
+      Processor = #{processor,jdbcType=VARCHAR},
+      ProcessorsTel = #{processorstel,jdbcType=VARCHAR},
+      ProcessorsMail = #{processorsmail,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

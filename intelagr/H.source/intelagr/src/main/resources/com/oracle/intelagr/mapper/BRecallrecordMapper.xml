@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BRecallrecordMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BRecallrecord" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+    <result column="Processor" property="processor" jdbcType="VARCHAR" />
+    <result column="SettleDate" property="settledate" jdbcType="TIMESTAMP" />
+    <result column="BatchNo" property="batchno" jdbcType="VARCHAR" />
+    <result column="ProductCode" property="productcode" jdbcType="VARCHAR" />
+    <result column="RecallReason" property="recallreason" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CompanyCode, Processor, SettleDate, BatchNo, ProductCode, RecallReason, Remark, 
+    DeleteFlag, CreateUserId, CreateDate, UpdateUserId, UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BRecallrecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_recallrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_recallrecord
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_recallrecord
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BRecallrecordExample" >
+    delete from b_recallrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BRecallrecord" >
+    insert into b_recallrecord (ID, CompanyCode, Processor, 
+      SettleDate, BatchNo, ProductCode, 
+      RecallReason, Remark, DeleteFlag, 
+      CreateUserId, CreateDate, UpdateUserId, 
+      UpdateDate)
+    values (#{id,jdbcType=INTEGER}, #{companycode,jdbcType=VARCHAR}, #{processor,jdbcType=VARCHAR}, 
+      #{settledate,jdbcType=TIMESTAMP}, #{batchno,jdbcType=VARCHAR}, #{productcode,jdbcType=VARCHAR}, 
+      #{recallreason,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{deleteflag,jdbcType=VARCHAR}, 
+      #{createuserid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=VARCHAR}, 
+      #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BRecallrecord" >
+    insert into b_recallrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+      <if test="processor != null" >
+        Processor,
+      </if>
+      <if test="settledate != null" >
+        SettleDate,
+      </if>
+      <if test="batchno != null" >
+        BatchNo,
+      </if>
+      <if test="productcode != null" >
+        ProductCode,
+      </if>
+      <if test="recallreason != null" >
+        RecallReason,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="processor != null" >
+        #{processor,jdbcType=VARCHAR},
+      </if>
+      <if test="settledate != null" >
+        #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recallreason != null" >
+        #{recallreason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BRecallrecordExample" resultType="java.lang.Integer" >
+    select count(*) from b_recallrecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_recallrecord
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.companycode != null" >
+        CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processor != null" >
+        Processor = #{record.processor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settledate != null" >
+        SettleDate = #{record.settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.batchno != null" >
+        BatchNo = #{record.batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productcode != null" >
+        ProductCode = #{record.productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recallreason != null" >
+        RecallReason = #{record.recallreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_recallrecord
+    set ID = #{record.id,jdbcType=INTEGER},
+      CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      Processor = #{record.processor,jdbcType=VARCHAR},
+      SettleDate = #{record.settledate,jdbcType=TIMESTAMP},
+      BatchNo = #{record.batchno,jdbcType=VARCHAR},
+      ProductCode = #{record.productcode,jdbcType=VARCHAR},
+      RecallReason = #{record.recallreason,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BRecallrecord" >
+    update b_recallrecord
+    <set >
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="processor != null" >
+        Processor = #{processor,jdbcType=VARCHAR},
+      </if>
+      <if test="settledate != null" >
+        SettleDate = #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchno != null" >
+        BatchNo = #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="productcode != null" >
+        ProductCode = #{productcode,jdbcType=VARCHAR},
+      </if>
+      <if test="recallreason != null" >
+        RecallReason = #{recallreason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BRecallrecord" >
+    update b_recallrecord
+    set CompanyCode = #{companycode,jdbcType=VARCHAR},
+      Processor = #{processor,jdbcType=VARCHAR},
+      SettleDate = #{settledate,jdbcType=TIMESTAMP},
+      BatchNo = #{batchno,jdbcType=VARCHAR},
+      ProductCode = #{productcode,jdbcType=VARCHAR},
+      RecallReason = #{recallreason,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

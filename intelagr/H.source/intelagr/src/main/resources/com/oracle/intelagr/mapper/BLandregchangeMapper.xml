@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BLandregchangeMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BLandregchange" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Year" property="year" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="ApplyBatchNo" property="applybatchno" jdbcType="VARCHAR" />
+    <result column="IDType" property="idtype" jdbcType="VARCHAR" />
+    <result column="ContractorID" property="contractorid" jdbcType="VARCHAR" />
+    <result column="ContractorName" property="contractorname" jdbcType="VARCHAR" />
+    <result column="ContractorTel" property="contractortel" jdbcType="VARCHAR" />
+    <result column="CityCode" property="citycode" jdbcType="VARCHAR" />
+    <result column="TownCode" property="towncode" jdbcType="VARCHAR" />
+    <result column="CountryCode" property="countrycode" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="GeneRegistType" property="generegisttype" jdbcType="VARCHAR" />
+    <result column="SpecRegistType" property="specregisttype" jdbcType="VARCHAR" />
+    <result column="Applicant" property="applicant" jdbcType="VARCHAR" />
+    <result column="ApplicantDate" property="applicantdate" jdbcType="TIMESTAMP" />
+    <result column="ApplicantTel" property="applicanttel" jdbcType="VARCHAR" />
+    <result column="ChangeReason" property="changereason" jdbcType="VARCHAR" />
+    <result column="ChangeRegistStatus" property="changeregiststatus" jdbcType="VARCHAR" />
+    <result column="Auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="AuditDate" property="auditdate" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="VARCHAR" />
+    <result column="RejectReason" property="rejectreason" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Year, CompanyCode, CompanyName, ApplyBatchNo, IDType, ContractorID, ContractorName, 
+    ContractorTel, CityCode, TownCode, CountryCode, Address, GeneRegistType, SpecRegistType, 
+    Applicant, ApplicantDate, ApplicantTel, ChangeReason, ChangeRegistStatus, Auditor, 
+    AuditDate, Status, RejectReason, Remark, DeleteFlag, CreateUserId, CreateDate, UpdateUserId, 
+    UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BLandregchangeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_landregchange
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_landregchange
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_landregchange
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BLandregchangeExample" >
+    delete from b_landregchange
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BLandregchange" >
+    insert into b_landregchange (ID, Year, CompanyCode, 
+      CompanyName, ApplyBatchNo, IDType, 
+      ContractorID, ContractorName, ContractorTel, 
+      CityCode, TownCode, CountryCode, 
+      Address, GeneRegistType, SpecRegistType, 
+      Applicant, ApplicantDate, ApplicantTel, 
+      ChangeReason, ChangeRegistStatus, Auditor, 
+      AuditDate, Status, RejectReason, 
+      Remark, DeleteFlag, CreateUserId, 
+      CreateDate, UpdateUserId, UpdateDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}, 
+      #{companyname,jdbcType=VARCHAR}, #{applybatchno,jdbcType=VARCHAR}, #{idtype,jdbcType=VARCHAR}, 
+      #{contractorid,jdbcType=VARCHAR}, #{contractorname,jdbcType=VARCHAR}, #{contractortel,jdbcType=VARCHAR}, 
+      #{citycode,jdbcType=VARCHAR}, #{towncode,jdbcType=VARCHAR}, #{countrycode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{generegisttype,jdbcType=VARCHAR}, #{specregisttype,jdbcType=VARCHAR}, 
+      #{applicant,jdbcType=VARCHAR}, #{applicantdate,jdbcType=TIMESTAMP}, #{applicanttel,jdbcType=VARCHAR}, 
+      #{changereason,jdbcType=VARCHAR}, #{changeregiststatus,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{auditdate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{rejectreason,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BLandregchange" >
+    insert into b_landregchange
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="year != null" >
+        Year,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="applybatchno != null" >
+        ApplyBatchNo,
+      </if>
+      <if test="idtype != null" >
+        IDType,
+      </if>
+      <if test="contractorid != null" >
+        ContractorID,
+      </if>
+      <if test="contractorname != null" >
+        ContractorName,
+      </if>
+      <if test="contractortel != null" >
+        ContractorTel,
+      </if>
+      <if test="citycode != null" >
+        CityCode,
+      </if>
+      <if test="towncode != null" >
+        TownCode,
+      </if>
+      <if test="countrycode != null" >
+        CountryCode,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="generegisttype != null" >
+        GeneRegistType,
+      </if>
+      <if test="specregisttype != null" >
+        SpecRegistType,
+      </if>
+      <if test="applicant != null" >
+        Applicant,
+      </if>
+      <if test="applicantdate != null" >
+        ApplicantDate,
+      </if>
+      <if test="applicanttel != null" >
+        ApplicantTel,
+      </if>
+      <if test="changereason != null" >
+        ChangeReason,
+      </if>
+      <if test="changeregiststatus != null" >
+        ChangeRegistStatus,
+      </if>
+      <if test="auditor != null" >
+        Auditor,
+      </if>
+      <if test="auditdate != null" >
+        AuditDate,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="rejectreason != null" >
+        RejectReason,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applybatchno != null" >
+        #{applybatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="idtype != null" >
+        #{idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorid != null" >
+        #{contractorid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorname != null" >
+        #{contractorname,jdbcType=VARCHAR},
+      </if>
+      <if test="contractortel != null" >
+        #{contractortel,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null" >
+        #{countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="generegisttype != null" >
+        #{generegisttype,jdbcType=VARCHAR},
+      </if>
+      <if test="specregisttype != null" >
+        #{specregisttype,jdbcType=VARCHAR},
+      </if>
+      <if test="applicant != null" >
+        #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="applicantdate != null" >
+        #{applicantdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicanttel != null" >
+        #{applicanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="changereason != null" >
+        #{changereason,jdbcType=VARCHAR},
+      </if>
+      <if test="changeregiststatus != null" >
+        #{changeregiststatus,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditdate != null" >
+        #{auditdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectreason != null" >
+        #{rejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BLandregchangeExample" resultType="java.lang.Integer" >
+    select count(*) from b_landregchange
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_landregchange
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null" >
+        Year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companycode != null" >
+        CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyname != null" >
+        CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applybatchno != null" >
+        ApplyBatchNo = #{record.applybatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idtype != null" >
+        IDType = #{record.idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorid != null" >
+        ContractorID = #{record.contractorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorname != null" >
+        ContractorName = #{record.contractorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractortel != null" >
+        ContractorTel = #{record.contractortel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citycode != null" >
+        CityCode = #{record.citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.towncode != null" >
+        TownCode = #{record.towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countrycode != null" >
+        CountryCode = #{record.countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.generegisttype != null" >
+        GeneRegistType = #{record.generegisttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specregisttype != null" >
+        SpecRegistType = #{record.specregisttype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicant != null" >
+        Applicant = #{record.applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicantdate != null" >
+        ApplicantDate = #{record.applicantdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applicanttel != null" >
+        ApplicantTel = #{record.applicanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changereason != null" >
+        ChangeReason = #{record.changereason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.changeregiststatus != null" >
+        ChangeRegistStatus = #{record.changeregiststatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null" >
+        Auditor = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditdate != null" >
+        AuditDate = #{record.auditdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rejectreason != null" >
+        RejectReason = #{record.rejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_landregchange
+    set ID = #{record.id,jdbcType=INTEGER},
+      Year = #{record.year,jdbcType=VARCHAR},
+      CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      ApplyBatchNo = #{record.applybatchno,jdbcType=VARCHAR},
+      IDType = #{record.idtype,jdbcType=VARCHAR},
+      ContractorID = #{record.contractorid,jdbcType=VARCHAR},
+      ContractorName = #{record.contractorname,jdbcType=VARCHAR},
+      ContractorTel = #{record.contractortel,jdbcType=VARCHAR},
+      CityCode = #{record.citycode,jdbcType=VARCHAR},
+      TownCode = #{record.towncode,jdbcType=VARCHAR},
+      CountryCode = #{record.countrycode,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      GeneRegistType = #{record.generegisttype,jdbcType=VARCHAR},
+      SpecRegistType = #{record.specregisttype,jdbcType=VARCHAR},
+      Applicant = #{record.applicant,jdbcType=VARCHAR},
+      ApplicantDate = #{record.applicantdate,jdbcType=TIMESTAMP},
+      ApplicantTel = #{record.applicanttel,jdbcType=VARCHAR},
+      ChangeReason = #{record.changereason,jdbcType=VARCHAR},
+      ChangeRegistStatus = #{record.changeregiststatus,jdbcType=VARCHAR},
+      Auditor = #{record.auditor,jdbcType=VARCHAR},
+      AuditDate = #{record.auditdate,jdbcType=TIMESTAMP},
+      Status = #{record.status,jdbcType=VARCHAR},
+      RejectReason = #{record.rejectreason,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BLandregchange" >
+    update b_landregchange
+    <set >
+      <if test="year != null" >
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applybatchno != null" >
+        ApplyBatchNo = #{applybatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="idtype != null" >
+        IDType = #{idtype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorid != null" >
+        ContractorID = #{contractorid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorname != null" >
+        ContractorName = #{contractorname,jdbcType=VARCHAR},
+      </if>
+      <if test="contractortel != null" >
+        ContractorTel = #{contractortel,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        CityCode = #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        TownCode = #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null" >
+        CountryCode = #{countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="generegisttype != null" >
+        GeneRegistType = #{generegisttype,jdbcType=VARCHAR},
+      </if>
+      <if test="specregisttype != null" >
+        SpecRegistType = #{specregisttype,jdbcType=VARCHAR},
+      </if>
+      <if test="applicant != null" >
+        Applicant = #{applicant,jdbcType=VARCHAR},
+      </if>
+      <if test="applicantdate != null" >
+        ApplicantDate = #{applicantdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicanttel != null" >
+        ApplicantTel = #{applicanttel,jdbcType=VARCHAR},
+      </if>
+      <if test="changereason != null" >
+        ChangeReason = #{changereason,jdbcType=VARCHAR},
+      </if>
+      <if test="changeregiststatus != null" >
+        ChangeRegistStatus = #{changeregiststatus,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        Auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditdate != null" >
+        AuditDate = #{auditdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="rejectreason != null" >
+        RejectReason = #{rejectreason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BLandregchange" >
+    update b_landregchange
+    set Year = #{year,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR},
+      CompanyName = #{companyname,jdbcType=VARCHAR},
+      ApplyBatchNo = #{applybatchno,jdbcType=VARCHAR},
+      IDType = #{idtype,jdbcType=VARCHAR},
+      ContractorID = #{contractorid,jdbcType=VARCHAR},
+      ContractorName = #{contractorname,jdbcType=VARCHAR},
+      ContractorTel = #{contractortel,jdbcType=VARCHAR},
+      CityCode = #{citycode,jdbcType=VARCHAR},
+      TownCode = #{towncode,jdbcType=VARCHAR},
+      CountryCode = #{countrycode,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      GeneRegistType = #{generegisttype,jdbcType=VARCHAR},
+      SpecRegistType = #{specregisttype,jdbcType=VARCHAR},
+      Applicant = #{applicant,jdbcType=VARCHAR},
+      ApplicantDate = #{applicantdate,jdbcType=TIMESTAMP},
+      ApplicantTel = #{applicanttel,jdbcType=VARCHAR},
+      ChangeReason = #{changereason,jdbcType=VARCHAR},
+      ChangeRegistStatus = #{changeregiststatus,jdbcType=VARCHAR},
+      Auditor = #{auditor,jdbcType=VARCHAR},
+      AuditDate = #{auditdate,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=VARCHAR},
+      RejectReason = #{rejectreason,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

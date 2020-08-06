@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BGenerallandreghMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BGenerallandregh" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Year" property="year" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+    <result column="CompanyName" property="companyname" jdbcType="VARCHAR" />
+    <result column="ApplyBatchNo" property="applybatchno" jdbcType="VARCHAR" />
+    <result column="Auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="AuditTime" property="audittime" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="VARCHAR" />
+    <result column="Reason" property="reason" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Year, CompanyCode, CompanyName, ApplyBatchNo, Auditor, AuditTime, Status, Reason, 
+    Remark, DeleteFlag, CreateUserId, CreateDate, UpdateUserId, UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BGenerallandreghExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_generallandregh
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_generallandregh
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_generallandregh
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BGenerallandreghExample" >
+    delete from b_generallandregh
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BGenerallandregh" >
+    insert into b_generallandregh (ID, Year, CompanyCode, 
+      CompanyName, ApplyBatchNo, Auditor, 
+      AuditTime, Status, Reason, 
+      Remark, DeleteFlag, CreateUserId, 
+      CreateDate, UpdateUserId, UpdateDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}, 
+      #{companyname,jdbcType=VARCHAR}, #{applybatchno,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{audittime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BGenerallandregh" >
+    insert into b_generallandregh
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="year != null" >
+        Year,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+      <if test="companyname != null" >
+        CompanyName,
+      </if>
+      <if test="applybatchno != null" >
+        ApplyBatchNo,
+      </if>
+      <if test="auditor != null" >
+        Auditor,
+      </if>
+      <if test="audittime != null" >
+        AuditTime,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="reason != null" >
+        Reason,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applybatchno != null" >
+        #{applybatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BGenerallandreghExample" resultType="java.lang.Integer" >
+    select count(*) from b_generallandregh
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_generallandregh
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null" >
+        Year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companycode != null" >
+        CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyname != null" >
+        CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applybatchno != null" >
+        ApplyBatchNo = #{record.applybatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null" >
+        Auditor = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audittime != null" >
+        AuditTime = #{record.audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reason != null" >
+        Reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_generallandregh
+    set ID = #{record.id,jdbcType=INTEGER},
+      Year = #{record.year,jdbcType=VARCHAR},
+      CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      CompanyName = #{record.companyname,jdbcType=VARCHAR},
+      ApplyBatchNo = #{record.applybatchno,jdbcType=VARCHAR},
+      Auditor = #{record.auditor,jdbcType=VARCHAR},
+      AuditTime = #{record.audittime,jdbcType=TIMESTAMP},
+      Status = #{record.status,jdbcType=VARCHAR},
+      Reason = #{record.reason,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BGenerallandregh" >
+    update b_generallandregh
+    <set >
+      <if test="year != null" >
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyname != null" >
+        CompanyName = #{companyname,jdbcType=VARCHAR},
+      </if>
+      <if test="applybatchno != null" >
+        ApplyBatchNo = #{applybatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        Auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        AuditTime = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        Reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BGenerallandregh" >
+    update b_generallandregh
+    set Year = #{year,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR},
+      CompanyName = #{companyname,jdbcType=VARCHAR},
+      ApplyBatchNo = #{applybatchno,jdbcType=VARCHAR},
+      Auditor = #{auditor,jdbcType=VARCHAR},
+      AuditTime = #{audittime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=VARCHAR},
+      Reason = #{reason,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

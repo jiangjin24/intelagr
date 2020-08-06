@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.MPeasantMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.MPeasant" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ContractorCode" property="contractorcode" jdbcType="VARCHAR" />
+    <result column="ContractorName" property="contractorname" jdbcType="VARCHAR" />
+    <result column="ContractorID" property="contractorid" jdbcType="VARCHAR" />
+    <result column="ContractorIDType" property="contractoridtype" jdbcType="VARCHAR" />
+    <result column="ContractorAge" property="contractorage" jdbcType="INTEGER" />
+    <result column="ContractorSex" property="contractorsex" jdbcType="VARCHAR" />
+    <result column="ContractorBirth" property="contractorbirth" jdbcType="VARCHAR" />
+    <result column="ContractorTel" property="contractortel" jdbcType="VARCHAR" />
+    <result column="CityCode" property="citycode" jdbcType="VARCHAR" />
+    <result column="TownCode" property="towncode" jdbcType="VARCHAR" />
+    <result column="CountryCode" property="countrycode" jdbcType="VARCHAR" />
+    <result column="GroupName" property="groupname" jdbcType="VARCHAR" />
+    <result column="ContractorZipcode" property="contractorzipcode" jdbcType="VARCHAR" />
+    <result column="ContractorhouseholdType" property="contractorhouseholdtype" jdbcType="VARCHAR" />
+    <result column="ContractorType" property="contractortype" jdbcType="VARCHAR" />
+    <result column="ContractId" property="contractid" jdbcType="VARCHAR" />
+    <result column="ContractorNation" property="contractornation" jdbcType="VARCHAR" />
+    <result column="RightId" property="rightid" jdbcType="VARCHAR" />
+    <result column="Attestor" property="attestor" jdbcType="VARCHAR" />
+    <result column="AttestMechanism" property="attestmechanism" jdbcType="VARCHAR" />
+    <result column="AttestDate" property="attestdate" jdbcType="DATE" />
+    <result column="AttestNo" property="attestno" jdbcType="VARCHAR" />
+    <result column="LandPurpose" property="landpurpose" jdbcType="VARCHAR" />
+    <result column="RightGetWay" property="rightgetway" jdbcType="VARCHAR" />
+    <result column="ContractStartDate" property="contractstartdate" jdbcType="TIMESTAMP" />
+    <result column="ContractYear" property="contractyear" jdbcType="INTEGER" />
+    <result column="ContractEndDate" property="contractenddate" jdbcType="TIMESTAMP" />
+    <result column="GetLandPersonCount" property="getlandpersoncount" jdbcType="INTEGER" />
+    <result column="FamilyPersonCount" property="familypersoncount" jdbcType="INTEGER" />
+    <result column="SurveyDate" property="surveydate" jdbcType="TIMESTAMP" />
+    <result column="SurveyMemo" property="surveymemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ContractorCode, ContractorName, ContractorID, ContractorIDType, ContractorAge, 
+    ContractorSex, ContractorBirth, ContractorTel, CityCode, TownCode, CountryCode, GroupName, 
+    ContractorZipcode, ContractorhouseholdType, ContractorType, ContractId, ContractorNation, 
+    RightId, Attestor, AttestMechanism, AttestDate, AttestNo, LandPurpose, RightGetWay, 
+    ContractStartDate, ContractYear, ContractEndDate, GetLandPersonCount, FamilyPersonCount, 
+    SurveyDate, SurveyMemo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.MPeasantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_peasant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_peasant
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_peasant
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.MPeasantExample" >
+    delete from m_peasant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.MPeasant" >
+    insert into m_peasant (ID, ContractorCode, ContractorName, 
+      ContractorID, ContractorIDType, ContractorAge, 
+      ContractorSex, ContractorBirth, ContractorTel, 
+      CityCode, TownCode, CountryCode, 
+      GroupName, ContractorZipcode, ContractorhouseholdType, 
+      ContractorType, ContractId, ContractorNation, 
+      RightId, Attestor, AttestMechanism, 
+      AttestDate, AttestNo, LandPurpose, 
+      RightGetWay, ContractStartDate, ContractYear, 
+      ContractEndDate, GetLandPersonCount, 
+      FamilyPersonCount, SurveyDate, SurveyMemo
+      )
+    values (#{id,jdbcType=INTEGER}, #{contractorcode,jdbcType=VARCHAR}, #{contractorname,jdbcType=VARCHAR}, 
+      #{contractorid,jdbcType=VARCHAR}, #{contractoridtype,jdbcType=VARCHAR}, #{contractorage,jdbcType=INTEGER}, 
+      #{contractorsex,jdbcType=VARCHAR}, #{contractorbirth,jdbcType=VARCHAR}, #{contractortel,jdbcType=VARCHAR}, 
+      #{citycode,jdbcType=VARCHAR}, #{towncode,jdbcType=VARCHAR}, #{countrycode,jdbcType=VARCHAR}, 
+      #{groupname,jdbcType=VARCHAR}, #{contractorzipcode,jdbcType=VARCHAR}, #{contractorhouseholdtype,jdbcType=VARCHAR}, 
+      #{contractortype,jdbcType=VARCHAR}, #{contractid,jdbcType=VARCHAR}, #{contractornation,jdbcType=VARCHAR}, 
+      #{rightid,jdbcType=VARCHAR}, #{attestor,jdbcType=VARCHAR}, #{attestmechanism,jdbcType=VARCHAR}, 
+      #{attestdate,jdbcType=DATE}, #{attestno,jdbcType=VARCHAR}, #{landpurpose,jdbcType=VARCHAR}, 
+      #{rightgetway,jdbcType=VARCHAR}, #{contractstartdate,jdbcType=TIMESTAMP}, #{contractyear,jdbcType=INTEGER}, 
+      #{contractenddate,jdbcType=TIMESTAMP}, #{getlandpersoncount,jdbcType=INTEGER}, 
+      #{familypersoncount,jdbcType=INTEGER}, #{surveydate,jdbcType=TIMESTAMP}, #{surveymemo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.MPeasant" >
+    insert into m_peasant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="contractorcode != null" >
+        ContractorCode,
+      </if>
+      <if test="contractorname != null" >
+        ContractorName,
+      </if>
+      <if test="contractorid != null" >
+        ContractorID,
+      </if>
+      <if test="contractoridtype != null" >
+        ContractorIDType,
+      </if>
+      <if test="contractorage != null" >
+        ContractorAge,
+      </if>
+      <if test="contractorsex != null" >
+        ContractorSex,
+      </if>
+      <if test="contractorbirth != null" >
+        ContractorBirth,
+      </if>
+      <if test="contractortel != null" >
+        ContractorTel,
+      </if>
+      <if test="citycode != null" >
+        CityCode,
+      </if>
+      <if test="towncode != null" >
+        TownCode,
+      </if>
+      <if test="countrycode != null" >
+        CountryCode,
+      </if>
+      <if test="groupname != null" >
+        GroupName,
+      </if>
+      <if test="contractorzipcode != null" >
+        ContractorZipcode,
+      </if>
+      <if test="contractorhouseholdtype != null" >
+        ContractorhouseholdType,
+      </if>
+      <if test="contractortype != null" >
+        ContractorType,
+      </if>
+      <if test="contractid != null" >
+        ContractId,
+      </if>
+      <if test="contractornation != null" >
+        ContractorNation,
+      </if>
+      <if test="rightid != null" >
+        RightId,
+      </if>
+      <if test="attestor != null" >
+        Attestor,
+      </if>
+      <if test="attestmechanism != null" >
+        AttestMechanism,
+      </if>
+      <if test="attestdate != null" >
+        AttestDate,
+      </if>
+      <if test="attestno != null" >
+        AttestNo,
+      </if>
+      <if test="landpurpose != null" >
+        LandPurpose,
+      </if>
+      <if test="rightgetway != null" >
+        RightGetWay,
+      </if>
+      <if test="contractstartdate != null" >
+        ContractStartDate,
+      </if>
+      <if test="contractyear != null" >
+        ContractYear,
+      </if>
+      <if test="contractenddate != null" >
+        ContractEndDate,
+      </if>
+      <if test="getlandpersoncount != null" >
+        GetLandPersonCount,
+      </if>
+      <if test="familypersoncount != null" >
+        FamilyPersonCount,
+      </if>
+      <if test="surveydate != null" >
+        SurveyDate,
+      </if>
+      <if test="surveymemo != null" >
+        SurveyMemo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contractorcode != null" >
+        #{contractorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorname != null" >
+        #{contractorname,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorid != null" >
+        #{contractorid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractoridtype != null" >
+        #{contractoridtype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorage != null" >
+        #{contractorage,jdbcType=INTEGER},
+      </if>
+      <if test="contractorsex != null" >
+        #{contractorsex,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorbirth != null" >
+        #{contractorbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="contractortel != null" >
+        #{contractortel,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null" >
+        #{countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorzipcode != null" >
+        #{contractorzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorhouseholdtype != null" >
+        #{contractorhouseholdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractortype != null" >
+        #{contractortype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null" >
+        #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractornation != null" >
+        #{contractornation,jdbcType=VARCHAR},
+      </if>
+      <if test="rightid != null" >
+        #{rightid,jdbcType=VARCHAR},
+      </if>
+      <if test="attestor != null" >
+        #{attestor,jdbcType=VARCHAR},
+      </if>
+      <if test="attestmechanism != null" >
+        #{attestmechanism,jdbcType=VARCHAR},
+      </if>
+      <if test="attestdate != null" >
+        #{attestdate,jdbcType=DATE},
+      </if>
+      <if test="attestno != null" >
+        #{attestno,jdbcType=VARCHAR},
+      </if>
+      <if test="landpurpose != null" >
+        #{landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="rightgetway != null" >
+        #{rightgetway,jdbcType=VARCHAR},
+      </if>
+      <if test="contractstartdate != null" >
+        #{contractstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractyear != null" >
+        #{contractyear,jdbcType=INTEGER},
+      </if>
+      <if test="contractenddate != null" >
+        #{contractenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getlandpersoncount != null" >
+        #{getlandpersoncount,jdbcType=INTEGER},
+      </if>
+      <if test="familypersoncount != null" >
+        #{familypersoncount,jdbcType=INTEGER},
+      </if>
+      <if test="surveydate != null" >
+        #{surveydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveymemo != null" >
+        #{surveymemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.MPeasantExample" resultType="java.lang.Integer" >
+    select count(*) from m_peasant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update m_peasant
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractorcode != null" >
+        ContractorCode = #{record.contractorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorname != null" >
+        ContractorName = #{record.contractorname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorid != null" >
+        ContractorID = #{record.contractorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractoridtype != null" >
+        ContractorIDType = #{record.contractoridtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorage != null" >
+        ContractorAge = #{record.contractorage,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractorsex != null" >
+        ContractorSex = #{record.contractorsex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorbirth != null" >
+        ContractorBirth = #{record.contractorbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractortel != null" >
+        ContractorTel = #{record.contractortel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citycode != null" >
+        CityCode = #{record.citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.towncode != null" >
+        TownCode = #{record.towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countrycode != null" >
+        CountryCode = #{record.countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupname != null" >
+        GroupName = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorzipcode != null" >
+        ContractorZipcode = #{record.contractorzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractorhouseholdtype != null" >
+        ContractorhouseholdType = #{record.contractorhouseholdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractortype != null" >
+        ContractorType = #{record.contractortype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null" >
+        ContractId = #{record.contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractornation != null" >
+        ContractorNation = #{record.contractornation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightid != null" >
+        RightId = #{record.rightid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attestor != null" >
+        Attestor = #{record.attestor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attestmechanism != null" >
+        AttestMechanism = #{record.attestmechanism,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attestdate != null" >
+        AttestDate = #{record.attestdate,jdbcType=DATE},
+      </if>
+      <if test="record.attestno != null" >
+        AttestNo = #{record.attestno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landpurpose != null" >
+        LandPurpose = #{record.landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightgetway != null" >
+        RightGetWay = #{record.rightgetway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractstartdate != null" >
+        ContractStartDate = #{record.contractstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contractyear != null" >
+        ContractYear = #{record.contractyear,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractenddate != null" >
+        ContractEndDate = #{record.contractenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.getlandpersoncount != null" >
+        GetLandPersonCount = #{record.getlandpersoncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.familypersoncount != null" >
+        FamilyPersonCount = #{record.familypersoncount,jdbcType=INTEGER},
+      </if>
+      <if test="record.surveydate != null" >
+        SurveyDate = #{record.surveydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.surveymemo != null" >
+        SurveyMemo = #{record.surveymemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update m_peasant
+    set ID = #{record.id,jdbcType=INTEGER},
+      ContractorCode = #{record.contractorcode,jdbcType=VARCHAR},
+      ContractorName = #{record.contractorname,jdbcType=VARCHAR},
+      ContractorID = #{record.contractorid,jdbcType=VARCHAR},
+      ContractorIDType = #{record.contractoridtype,jdbcType=VARCHAR},
+      ContractorAge = #{record.contractorage,jdbcType=INTEGER},
+      ContractorSex = #{record.contractorsex,jdbcType=VARCHAR},
+      ContractorBirth = #{record.contractorbirth,jdbcType=VARCHAR},
+      ContractorTel = #{record.contractortel,jdbcType=VARCHAR},
+      CityCode = #{record.citycode,jdbcType=VARCHAR},
+      TownCode = #{record.towncode,jdbcType=VARCHAR},
+      CountryCode = #{record.countrycode,jdbcType=VARCHAR},
+      GroupName = #{record.groupname,jdbcType=VARCHAR},
+      ContractorZipcode = #{record.contractorzipcode,jdbcType=VARCHAR},
+      ContractorhouseholdType = #{record.contractorhouseholdtype,jdbcType=VARCHAR},
+      ContractorType = #{record.contractortype,jdbcType=VARCHAR},
+      ContractId = #{record.contractid,jdbcType=VARCHAR},
+      ContractorNation = #{record.contractornation,jdbcType=VARCHAR},
+      RightId = #{record.rightid,jdbcType=VARCHAR},
+      Attestor = #{record.attestor,jdbcType=VARCHAR},
+      AttestMechanism = #{record.attestmechanism,jdbcType=VARCHAR},
+      AttestDate = #{record.attestdate,jdbcType=DATE},
+      AttestNo = #{record.attestno,jdbcType=VARCHAR},
+      LandPurpose = #{record.landpurpose,jdbcType=VARCHAR},
+      RightGetWay = #{record.rightgetway,jdbcType=VARCHAR},
+      ContractStartDate = #{record.contractstartdate,jdbcType=TIMESTAMP},
+      ContractYear = #{record.contractyear,jdbcType=INTEGER},
+      ContractEndDate = #{record.contractenddate,jdbcType=TIMESTAMP},
+      GetLandPersonCount = #{record.getlandpersoncount,jdbcType=INTEGER},
+      FamilyPersonCount = #{record.familypersoncount,jdbcType=INTEGER},
+      SurveyDate = #{record.surveydate,jdbcType=TIMESTAMP},
+      SurveyMemo = #{record.surveymemo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.MPeasant" >
+    update m_peasant
+    <set >
+      <if test="contractorcode != null" >
+        ContractorCode = #{contractorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorname != null" >
+        ContractorName = #{contractorname,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorid != null" >
+        ContractorID = #{contractorid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractoridtype != null" >
+        ContractorIDType = #{contractoridtype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorage != null" >
+        ContractorAge = #{contractorage,jdbcType=INTEGER},
+      </if>
+      <if test="contractorsex != null" >
+        ContractorSex = #{contractorsex,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorbirth != null" >
+        ContractorBirth = #{contractorbirth,jdbcType=VARCHAR},
+      </if>
+      <if test="contractortel != null" >
+        ContractorTel = #{contractortel,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        CityCode = #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        TownCode = #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null" >
+        CountryCode = #{countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        GroupName = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorzipcode != null" >
+        ContractorZipcode = #{contractorzipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractorhouseholdtype != null" >
+        ContractorhouseholdType = #{contractorhouseholdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractortype != null" >
+        ContractorType = #{contractortype,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null" >
+        ContractId = #{contractid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractornation != null" >
+        ContractorNation = #{contractornation,jdbcType=VARCHAR},
+      </if>
+      <if test="rightid != null" >
+        RightId = #{rightid,jdbcType=VARCHAR},
+      </if>
+      <if test="attestor != null" >
+        Attestor = #{attestor,jdbcType=VARCHAR},
+      </if>
+      <if test="attestmechanism != null" >
+        AttestMechanism = #{attestmechanism,jdbcType=VARCHAR},
+      </if>
+      <if test="attestdate != null" >
+        AttestDate = #{attestdate,jdbcType=DATE},
+      </if>
+      <if test="attestno != null" >
+        AttestNo = #{attestno,jdbcType=VARCHAR},
+      </if>
+      <if test="landpurpose != null" >
+        LandPurpose = #{landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="rightgetway != null" >
+        RightGetWay = #{rightgetway,jdbcType=VARCHAR},
+      </if>
+      <if test="contractstartdate != null" >
+        ContractStartDate = #{contractstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractyear != null" >
+        ContractYear = #{contractyear,jdbcType=INTEGER},
+      </if>
+      <if test="contractenddate != null" >
+        ContractEndDate = #{contractenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getlandpersoncount != null" >
+        GetLandPersonCount = #{getlandpersoncount,jdbcType=INTEGER},
+      </if>
+      <if test="familypersoncount != null" >
+        FamilyPersonCount = #{familypersoncount,jdbcType=INTEGER},
+      </if>
+      <if test="surveydate != null" >
+        SurveyDate = #{surveydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surveymemo != null" >
+        SurveyMemo = #{surveymemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.MPeasant" >
+    update m_peasant
+    set ContractorCode = #{contractorcode,jdbcType=VARCHAR},
+      ContractorName = #{contractorname,jdbcType=VARCHAR},
+      ContractorID = #{contractorid,jdbcType=VARCHAR},
+      ContractorIDType = #{contractoridtype,jdbcType=VARCHAR},
+      ContractorAge = #{contractorage,jdbcType=INTEGER},
+      ContractorSex = #{contractorsex,jdbcType=VARCHAR},
+      ContractorBirth = #{contractorbirth,jdbcType=VARCHAR},
+      ContractorTel = #{contractortel,jdbcType=VARCHAR},
+      CityCode = #{citycode,jdbcType=VARCHAR},
+      TownCode = #{towncode,jdbcType=VARCHAR},
+      CountryCode = #{countrycode,jdbcType=VARCHAR},
+      GroupName = #{groupname,jdbcType=VARCHAR},
+      ContractorZipcode = #{contractorzipcode,jdbcType=VARCHAR},
+      ContractorhouseholdType = #{contractorhouseholdtype,jdbcType=VARCHAR},
+      ContractorType = #{contractortype,jdbcType=VARCHAR},
+      ContractId = #{contractid,jdbcType=VARCHAR},
+      ContractorNation = #{contractornation,jdbcType=VARCHAR},
+      RightId = #{rightid,jdbcType=VARCHAR},
+      Attestor = #{attestor,jdbcType=VARCHAR},
+      AttestMechanism = #{attestmechanism,jdbcType=VARCHAR},
+      AttestDate = #{attestdate,jdbcType=DATE},
+      AttestNo = #{attestno,jdbcType=VARCHAR},
+      LandPurpose = #{landpurpose,jdbcType=VARCHAR},
+      RightGetWay = #{rightgetway,jdbcType=VARCHAR},
+      ContractStartDate = #{contractstartdate,jdbcType=TIMESTAMP},
+      ContractYear = #{contractyear,jdbcType=INTEGER},
+      ContractEndDate = #{contractenddate,jdbcType=TIMESTAMP},
+      GetLandPersonCount = #{getlandpersoncount,jdbcType=INTEGER},
+      FamilyPersonCount = #{familypersoncount,jdbcType=INTEGER},
+      SurveyDate = #{surveydate,jdbcType=TIMESTAMP},
+      SurveyMemo = #{surveymemo,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

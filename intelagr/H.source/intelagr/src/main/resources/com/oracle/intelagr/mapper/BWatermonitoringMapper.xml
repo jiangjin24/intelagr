@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BWatermonitoringMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BWatermonitoring" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MonitorDate" property="monitordate" jdbcType="TIMESTAMP" />
+    <result column="MonitorPointCode" property="monitorpointcode" jdbcType="VARCHAR" />
+    <result column="PH" property="ph" jdbcType="REAL" />
+    <result column="DOValue" property="dovalue" jdbcType="REAL" />
+    <result column="CODMn" property="codmn" jdbcType="REAL" />
+    <result column="BOD5" property="bod5" jdbcType="REAL" />
+    <result column="NH3N" property="nh3n" jdbcType="REAL" />
+    <result column="TP" property="tp" jdbcType="REAL" />
+    <result column="CODCr" property="codcr" jdbcType="REAL" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MonitorDate, MonitorPointCode, PH, DOValue, CODMn, BOD5, NH3N, TP, CODCr, Remark, 
+    DeleteFlag, CreateUserId, CreateDate, UpdateUserId, UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BWatermonitoringExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_watermonitoring
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_watermonitoring
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_watermonitoring
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BWatermonitoringExample" >
+    delete from b_watermonitoring
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BWatermonitoring" >
+    insert into b_watermonitoring (ID, MonitorDate, MonitorPointCode, 
+      PH, DOValue, CODMn, BOD5, 
+      NH3N, TP, CODCr, Remark, 
+      DeleteFlag, CreateUserId, CreateDate, 
+      UpdateUserId, UpdateDate)
+    values (#{id,jdbcType=INTEGER}, #{monitordate,jdbcType=TIMESTAMP}, #{monitorpointcode,jdbcType=VARCHAR}, 
+      #{ph,jdbcType=REAL}, #{dovalue,jdbcType=REAL}, #{codmn,jdbcType=REAL}, #{bod5,jdbcType=REAL}, 
+      #{nh3n,jdbcType=REAL}, #{tp,jdbcType=REAL}, #{codcr,jdbcType=REAL}, #{remark,jdbcType=VARCHAR}, 
+      #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BWatermonitoring" >
+    insert into b_watermonitoring
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="monitordate != null" >
+        MonitorDate,
+      </if>
+      <if test="monitorpointcode != null" >
+        MonitorPointCode,
+      </if>
+      <if test="ph != null" >
+        PH,
+      </if>
+      <if test="dovalue != null" >
+        DOValue,
+      </if>
+      <if test="codmn != null" >
+        CODMn,
+      </if>
+      <if test="bod5 != null" >
+        BOD5,
+      </if>
+      <if test="nh3n != null" >
+        NH3N,
+      </if>
+      <if test="tp != null" >
+        TP,
+      </if>
+      <if test="codcr != null" >
+        CODCr,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="monitordate != null" >
+        #{monitordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorpointcode != null" >
+        #{monitorpointcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null" >
+        #{ph,jdbcType=REAL},
+      </if>
+      <if test="dovalue != null" >
+        #{dovalue,jdbcType=REAL},
+      </if>
+      <if test="codmn != null" >
+        #{codmn,jdbcType=REAL},
+      </if>
+      <if test="bod5 != null" >
+        #{bod5,jdbcType=REAL},
+      </if>
+      <if test="nh3n != null" >
+        #{nh3n,jdbcType=REAL},
+      </if>
+      <if test="tp != null" >
+        #{tp,jdbcType=REAL},
+      </if>
+      <if test="codcr != null" >
+        #{codcr,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BWatermonitoringExample" resultType="java.lang.Integer" >
+    select count(*) from b_watermonitoring
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_watermonitoring
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.monitordate != null" >
+        MonitorDate = #{record.monitordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.monitorpointcode != null" >
+        MonitorPointCode = #{record.monitorpointcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ph != null" >
+        PH = #{record.ph,jdbcType=REAL},
+      </if>
+      <if test="record.dovalue != null" >
+        DOValue = #{record.dovalue,jdbcType=REAL},
+      </if>
+      <if test="record.codmn != null" >
+        CODMn = #{record.codmn,jdbcType=REAL},
+      </if>
+      <if test="record.bod5 != null" >
+        BOD5 = #{record.bod5,jdbcType=REAL},
+      </if>
+      <if test="record.nh3n != null" >
+        NH3N = #{record.nh3n,jdbcType=REAL},
+      </if>
+      <if test="record.tp != null" >
+        TP = #{record.tp,jdbcType=REAL},
+      </if>
+      <if test="record.codcr != null" >
+        CODCr = #{record.codcr,jdbcType=REAL},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_watermonitoring
+    set ID = #{record.id,jdbcType=INTEGER},
+      MonitorDate = #{record.monitordate,jdbcType=TIMESTAMP},
+      MonitorPointCode = #{record.monitorpointcode,jdbcType=VARCHAR},
+      PH = #{record.ph,jdbcType=REAL},
+      DOValue = #{record.dovalue,jdbcType=REAL},
+      CODMn = #{record.codmn,jdbcType=REAL},
+      BOD5 = #{record.bod5,jdbcType=REAL},
+      NH3N = #{record.nh3n,jdbcType=REAL},
+      TP = #{record.tp,jdbcType=REAL},
+      CODCr = #{record.codcr,jdbcType=REAL},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BWatermonitoring" >
+    update b_watermonitoring
+    <set >
+      <if test="monitordate != null" >
+        MonitorDate = #{monitordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorpointcode != null" >
+        MonitorPointCode = #{monitorpointcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ph != null" >
+        PH = #{ph,jdbcType=REAL},
+      </if>
+      <if test="dovalue != null" >
+        DOValue = #{dovalue,jdbcType=REAL},
+      </if>
+      <if test="codmn != null" >
+        CODMn = #{codmn,jdbcType=REAL},
+      </if>
+      <if test="bod5 != null" >
+        BOD5 = #{bod5,jdbcType=REAL},
+      </if>
+      <if test="nh3n != null" >
+        NH3N = #{nh3n,jdbcType=REAL},
+      </if>
+      <if test="tp != null" >
+        TP = #{tp,jdbcType=REAL},
+      </if>
+      <if test="codcr != null" >
+        CODCr = #{codcr,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BWatermonitoring" >
+    update b_watermonitoring
+    set MonitorDate = #{monitordate,jdbcType=TIMESTAMP},
+      MonitorPointCode = #{monitorpointcode,jdbcType=VARCHAR},
+      PH = #{ph,jdbcType=REAL},
+      DOValue = #{dovalue,jdbcType=REAL},
+      CODMn = #{codmn,jdbcType=REAL},
+      BOD5 = #{bod5,jdbcType=REAL},
+      NH3N = #{nh3n,jdbcType=REAL},
+      TP = #{tp,jdbcType=REAL},
+      CODCr = #{codcr,jdbcType=REAL},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

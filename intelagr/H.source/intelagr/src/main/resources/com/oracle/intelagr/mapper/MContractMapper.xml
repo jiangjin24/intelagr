@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.MContractMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.MContract" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ContractorCode" property="contractorcode" jdbcType="VARCHAR" />
+    <result column="GraphCode" property="graphcode" jdbcType="VARCHAR" />
+    <result column="LandCode" property="landcode" jdbcType="VARCHAR" />
+    <result column="LandName" property="landname" jdbcType="VARCHAR" />
+    <result column="EastTo" property="eastto" jdbcType="VARCHAR" />
+    <result column="ContractArea" property="contractarea" jdbcType="REAL" />
+    <result column="MeasurementMu" property="measurementmu" jdbcType="REAL" />
+    <result column="WestTo" property="westto" jdbcType="VARCHAR" />
+    <result column="SouthTo" property="southto" jdbcType="VARCHAR" />
+    <result column="NorthTo" property="northto" jdbcType="VARCHAR" />
+    <result column="LandLevel" property="landlevel" jdbcType="VARCHAR" />
+    <result column="LandType" property="landtype" jdbcType="VARCHAR" />
+    <result column="IsBaseLand" property="isbaseland" jdbcType="VARCHAR" />
+    <result column="Ownership" property="ownership" jdbcType="VARCHAR" />
+    <result column="LandClass" property="landclass" jdbcType="VARCHAR" />
+    <result column="DisputeReason" property="disputereason" jdbcType="VARCHAR" />
+    <result column="LandPurpose" property="landpurpose" jdbcType="VARCHAR" />
+    <result column="ContractStartDate" property="contractstartdate" jdbcType="TIMESTAMP" />
+    <result column="ContractYear" property="contractyear" jdbcType="INTEGER" />
+    <result column="ContractEndDate" property="contractenddate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ContractorCode, GraphCode, LandCode, LandName, EastTo, ContractArea, MeasurementMu, 
+    WestTo, SouthTo, NorthTo, LandLevel, LandType, IsBaseLand, Ownership, LandClass, 
+    DisputeReason, LandPurpose, ContractStartDate, ContractYear, ContractEndDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.MContractExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from m_contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from m_contract
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from m_contract
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.MContractExample" >
+    delete from m_contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.MContract" >
+    insert into m_contract (ID, ContractorCode, GraphCode, 
+      LandCode, LandName, EastTo, 
+      ContractArea, MeasurementMu, WestTo, 
+      SouthTo, NorthTo, LandLevel, 
+      LandType, IsBaseLand, Ownership, 
+      LandClass, DisputeReason, LandPurpose, 
+      ContractStartDate, ContractYear, ContractEndDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{contractorcode,jdbcType=VARCHAR}, #{graphcode,jdbcType=VARCHAR}, 
+      #{landcode,jdbcType=VARCHAR}, #{landname,jdbcType=VARCHAR}, #{eastto,jdbcType=VARCHAR}, 
+      #{contractarea,jdbcType=REAL}, #{measurementmu,jdbcType=REAL}, #{westto,jdbcType=VARCHAR}, 
+      #{southto,jdbcType=VARCHAR}, #{northto,jdbcType=VARCHAR}, #{landlevel,jdbcType=VARCHAR}, 
+      #{landtype,jdbcType=VARCHAR}, #{isbaseland,jdbcType=VARCHAR}, #{ownership,jdbcType=VARCHAR}, 
+      #{landclass,jdbcType=VARCHAR}, #{disputereason,jdbcType=VARCHAR}, #{landpurpose,jdbcType=VARCHAR}, 
+      #{contractstartdate,jdbcType=TIMESTAMP}, #{contractyear,jdbcType=INTEGER}, #{contractenddate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.MContract" >
+    insert into m_contract
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="contractorcode != null" >
+        ContractorCode,
+      </if>
+      <if test="graphcode != null" >
+        GraphCode,
+      </if>
+      <if test="landcode != null" >
+        LandCode,
+      </if>
+      <if test="landname != null" >
+        LandName,
+      </if>
+      <if test="eastto != null" >
+        EastTo,
+      </if>
+      <if test="contractarea != null" >
+        ContractArea,
+      </if>
+      <if test="measurementmu != null" >
+        MeasurementMu,
+      </if>
+      <if test="westto != null" >
+        WestTo,
+      </if>
+      <if test="southto != null" >
+        SouthTo,
+      </if>
+      <if test="northto != null" >
+        NorthTo,
+      </if>
+      <if test="landlevel != null" >
+        LandLevel,
+      </if>
+      <if test="landtype != null" >
+        LandType,
+      </if>
+      <if test="isbaseland != null" >
+        IsBaseLand,
+      </if>
+      <if test="ownership != null" >
+        Ownership,
+      </if>
+      <if test="landclass != null" >
+        LandClass,
+      </if>
+      <if test="disputereason != null" >
+        DisputeReason,
+      </if>
+      <if test="landpurpose != null" >
+        LandPurpose,
+      </if>
+      <if test="contractstartdate != null" >
+        ContractStartDate,
+      </if>
+      <if test="contractyear != null" >
+        ContractYear,
+      </if>
+      <if test="contractenddate != null" >
+        ContractEndDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="contractorcode != null" >
+        #{contractorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="graphcode != null" >
+        #{graphcode,jdbcType=VARCHAR},
+      </if>
+      <if test="landcode != null" >
+        #{landcode,jdbcType=VARCHAR},
+      </if>
+      <if test="landname != null" >
+        #{landname,jdbcType=VARCHAR},
+      </if>
+      <if test="eastto != null" >
+        #{eastto,jdbcType=VARCHAR},
+      </if>
+      <if test="contractarea != null" >
+        #{contractarea,jdbcType=REAL},
+      </if>
+      <if test="measurementmu != null" >
+        #{measurementmu,jdbcType=REAL},
+      </if>
+      <if test="westto != null" >
+        #{westto,jdbcType=VARCHAR},
+      </if>
+      <if test="southto != null" >
+        #{southto,jdbcType=VARCHAR},
+      </if>
+      <if test="northto != null" >
+        #{northto,jdbcType=VARCHAR},
+      </if>
+      <if test="landlevel != null" >
+        #{landlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="landtype != null" >
+        #{landtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isbaseland != null" >
+        #{isbaseland,jdbcType=VARCHAR},
+      </if>
+      <if test="ownership != null" >
+        #{ownership,jdbcType=VARCHAR},
+      </if>
+      <if test="landclass != null" >
+        #{landclass,jdbcType=VARCHAR},
+      </if>
+      <if test="disputereason != null" >
+        #{disputereason,jdbcType=VARCHAR},
+      </if>
+      <if test="landpurpose != null" >
+        #{landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="contractstartdate != null" >
+        #{contractstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractyear != null" >
+        #{contractyear,jdbcType=INTEGER},
+      </if>
+      <if test="contractenddate != null" >
+        #{contractenddate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.MContractExample" resultType="java.lang.Integer" >
+    select count(*) from m_contract
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update m_contract
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractorcode != null" >
+        ContractorCode = #{record.contractorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graphcode != null" >
+        GraphCode = #{record.graphcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landcode != null" >
+        LandCode = #{record.landcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landname != null" >
+        LandName = #{record.landname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eastto != null" >
+        EastTo = #{record.eastto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractarea != null" >
+        ContractArea = #{record.contractarea,jdbcType=REAL},
+      </if>
+      <if test="record.measurementmu != null" >
+        MeasurementMu = #{record.measurementmu,jdbcType=REAL},
+      </if>
+      <if test="record.westto != null" >
+        WestTo = #{record.westto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.southto != null" >
+        SouthTo = #{record.southto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.northto != null" >
+        NorthTo = #{record.northto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landlevel != null" >
+        LandLevel = #{record.landlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landtype != null" >
+        LandType = #{record.landtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isbaseland != null" >
+        IsBaseLand = #{record.isbaseland,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ownership != null" >
+        Ownership = #{record.ownership,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landclass != null" >
+        LandClass = #{record.landclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disputereason != null" >
+        DisputeReason = #{record.disputereason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landpurpose != null" >
+        LandPurpose = #{record.landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractstartdate != null" >
+        ContractStartDate = #{record.contractstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.contractyear != null" >
+        ContractYear = #{record.contractyear,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractenddate != null" >
+        ContractEndDate = #{record.contractenddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update m_contract
+    set ID = #{record.id,jdbcType=INTEGER},
+      ContractorCode = #{record.contractorcode,jdbcType=VARCHAR},
+      GraphCode = #{record.graphcode,jdbcType=VARCHAR},
+      LandCode = #{record.landcode,jdbcType=VARCHAR},
+      LandName = #{record.landname,jdbcType=VARCHAR},
+      EastTo = #{record.eastto,jdbcType=VARCHAR},
+      ContractArea = #{record.contractarea,jdbcType=REAL},
+      MeasurementMu = #{record.measurementmu,jdbcType=REAL},
+      WestTo = #{record.westto,jdbcType=VARCHAR},
+      SouthTo = #{record.southto,jdbcType=VARCHAR},
+      NorthTo = #{record.northto,jdbcType=VARCHAR},
+      LandLevel = #{record.landlevel,jdbcType=VARCHAR},
+      LandType = #{record.landtype,jdbcType=VARCHAR},
+      IsBaseLand = #{record.isbaseland,jdbcType=VARCHAR},
+      Ownership = #{record.ownership,jdbcType=VARCHAR},
+      LandClass = #{record.landclass,jdbcType=VARCHAR},
+      DisputeReason = #{record.disputereason,jdbcType=VARCHAR},
+      LandPurpose = #{record.landpurpose,jdbcType=VARCHAR},
+      ContractStartDate = #{record.contractstartdate,jdbcType=TIMESTAMP},
+      ContractYear = #{record.contractyear,jdbcType=INTEGER},
+      ContractEndDate = #{record.contractenddate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.MContract" >
+    update m_contract
+    <set >
+      <if test="contractorcode != null" >
+        ContractorCode = #{contractorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="graphcode != null" >
+        GraphCode = #{graphcode,jdbcType=VARCHAR},
+      </if>
+      <if test="landcode != null" >
+        LandCode = #{landcode,jdbcType=VARCHAR},
+      </if>
+      <if test="landname != null" >
+        LandName = #{landname,jdbcType=VARCHAR},
+      </if>
+      <if test="eastto != null" >
+        EastTo = #{eastto,jdbcType=VARCHAR},
+      </if>
+      <if test="contractarea != null" >
+        ContractArea = #{contractarea,jdbcType=REAL},
+      </if>
+      <if test="measurementmu != null" >
+        MeasurementMu = #{measurementmu,jdbcType=REAL},
+      </if>
+      <if test="westto != null" >
+        WestTo = #{westto,jdbcType=VARCHAR},
+      </if>
+      <if test="southto != null" >
+        SouthTo = #{southto,jdbcType=VARCHAR},
+      </if>
+      <if test="northto != null" >
+        NorthTo = #{northto,jdbcType=VARCHAR},
+      </if>
+      <if test="landlevel != null" >
+        LandLevel = #{landlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="landtype != null" >
+        LandType = #{landtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isbaseland != null" >
+        IsBaseLand = #{isbaseland,jdbcType=VARCHAR},
+      </if>
+      <if test="ownership != null" >
+        Ownership = #{ownership,jdbcType=VARCHAR},
+      </if>
+      <if test="landclass != null" >
+        LandClass = #{landclass,jdbcType=VARCHAR},
+      </if>
+      <if test="disputereason != null" >
+        DisputeReason = #{disputereason,jdbcType=VARCHAR},
+      </if>
+      <if test="landpurpose != null" >
+        LandPurpose = #{landpurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="contractstartdate != null" >
+        ContractStartDate = #{contractstartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="contractyear != null" >
+        ContractYear = #{contractyear,jdbcType=INTEGER},
+      </if>
+      <if test="contractenddate != null" >
+        ContractEndDate = #{contractenddate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.MContract" >
+    update m_contract
+    set ContractorCode = #{contractorcode,jdbcType=VARCHAR},
+      GraphCode = #{graphcode,jdbcType=VARCHAR},
+      LandCode = #{landcode,jdbcType=VARCHAR},
+      LandName = #{landname,jdbcType=VARCHAR},
+      EastTo = #{eastto,jdbcType=VARCHAR},
+      ContractArea = #{contractarea,jdbcType=REAL},
+      MeasurementMu = #{measurementmu,jdbcType=REAL},
+      WestTo = #{westto,jdbcType=VARCHAR},
+      SouthTo = #{southto,jdbcType=VARCHAR},
+      NorthTo = #{northto,jdbcType=VARCHAR},
+      LandLevel = #{landlevel,jdbcType=VARCHAR},
+      LandType = #{landtype,jdbcType=VARCHAR},
+      IsBaseLand = #{isbaseland,jdbcType=VARCHAR},
+      Ownership = #{ownership,jdbcType=VARCHAR},
+      LandClass = #{landclass,jdbcType=VARCHAR},
+      DisputeReason = #{disputereason,jdbcType=VARCHAR},
+      LandPurpose = #{landpurpose,jdbcType=VARCHAR},
+      ContractStartDate = #{contractstartdate,jdbcType=TIMESTAMP},
+      ContractYear = #{contractyear,jdbcType=INTEGER},
+      ContractEndDate = #{contractenddate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

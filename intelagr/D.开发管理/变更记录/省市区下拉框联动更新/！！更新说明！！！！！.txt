@@ -1,0 +1,25 @@
+先将文件更新到如下目录：
+src:
+com.oracle.intelagr.common.taglib: CasCadeCityTag.java
+com.oracle.intelagr.service:AreaDevisionService.java
+com.oracle.intelagr.service.impl:AreaDevisionServiceImpl.java
+com.oracle.intelagr.mapper:AreaDevisionMapper.java
+com.oracle.intelagr.controller:AreaDevisionController.java
+com.oracle.intelagr.common:ComboModel.java
+resource:
+com.oracle.intelagr.mapper:AreaDevisionMapper.xml
+webapp:
+WEB-INF:simpletaglib.tld
+
+simple标签使用示例：
+
+1.在jsp中引入标签库：
+<%@taglib prefix="simple" uri="/tags/simple" %>
+2.使用casCity标签，例如：
+<td class="table_common_td_label_style">住址：</td>
+<td colspan="3" class="table_common_td_txt_style editableFalse">
+<!-- 使用casCity标签 -->
+<simple:casCity  countryWidth="140" cityWidth="140" groupWidth="260" cityId="cityCode" cityName="cityCode" cityCode="${specLandReg.cityCode}" townCode="${specLandReg.townCode }" countryCode="${specLandReg.countryCode }" groupValue="${specLandReg.groupName }" townId="townCode" townName="townCode" countryId="countryCode" countryName="countryCode" groupName="groupName" groupId="groupName" showCity="false" showText="false" canEdit="false" showGroup="true"/>
+
+<span class="span_common_mustinput_style">*</span>
+</td>

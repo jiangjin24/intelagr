@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BQualityMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BQuality" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="Year" property="year" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+    <result column="CheckCode" property="checkcode" jdbcType="VARCHAR" />
+    <result column="DeliveryDate" property="deliverydate" jdbcType="TIMESTAMP" />
+    <result column="InspectDate" property="inspectdate" jdbcType="TIMESTAMP" />
+    <result column="DeliveryPerson" property="deliveryperson" jdbcType="VARCHAR" />
+    <result column="HandoverPerson" property="handoverperson" jdbcType="VARCHAR" />
+    <result column="HandoverTime" property="handovertime" jdbcType="TIMESTAMP" />
+    <result column="InspectPerson" property="inspectperson" jdbcType="VARCHAR" />
+    <result column="InspectStatus" property="inspectstatus" jdbcType="VARCHAR" />
+    <result column="Path" property="path" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, Year, CompanyCode, CheckCode, DeliveryDate, InspectDate, DeliveryPerson, HandoverPerson, 
+    HandoverTime, InspectPerson, InspectStatus, Path, Remark, DeleteFlag, CreateUserId, 
+    CreateDate, UpdateUserId, UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BQualityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_quality
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_quality
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BQualityExample" >
+    delete from b_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BQuality" >
+    insert into b_quality (ID, Year, CompanyCode, 
+      CheckCode, DeliveryDate, InspectDate, 
+      DeliveryPerson, HandoverPerson, HandoverTime, 
+      InspectPerson, InspectStatus, Path, 
+      Remark, DeleteFlag, CreateUserId, 
+      CreateDate, UpdateUserId, UpdateDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}, 
+      #{checkcode,jdbcType=VARCHAR}, #{deliverydate,jdbcType=TIMESTAMP}, #{inspectdate,jdbcType=TIMESTAMP}, 
+      #{deliveryperson,jdbcType=VARCHAR}, #{handoverperson,jdbcType=VARCHAR}, #{handovertime,jdbcType=TIMESTAMP}, 
+      #{inspectperson,jdbcType=VARCHAR}, #{inspectstatus,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BQuality" >
+    insert into b_quality
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="year != null" >
+        Year,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+      <if test="checkcode != null" >
+        CheckCode,
+      </if>
+      <if test="deliverydate != null" >
+        DeliveryDate,
+      </if>
+      <if test="inspectdate != null" >
+        InspectDate,
+      </if>
+      <if test="deliveryperson != null" >
+        DeliveryPerson,
+      </if>
+      <if test="handoverperson != null" >
+        HandoverPerson,
+      </if>
+      <if test="handovertime != null" >
+        HandoverTime,
+      </if>
+      <if test="inspectperson != null" >
+        InspectPerson,
+      </if>
+      <if test="inspectstatus != null" >
+        InspectStatus,
+      </if>
+      <if test="path != null" >
+        Path,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcode != null" >
+        #{checkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydate != null" >
+        #{deliverydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inspectdate != null" >
+        #{inspectdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryperson != null" >
+        #{deliveryperson,jdbcType=VARCHAR},
+      </if>
+      <if test="handoverperson != null" >
+        #{handoverperson,jdbcType=VARCHAR},
+      </if>
+      <if test="handovertime != null" >
+        #{handovertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inspectperson != null" >
+        #{inspectperson,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectstatus != null" >
+        #{inspectstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BQualityExample" resultType="java.lang.Integer" >
+    select count(*) from b_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_quality
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null" >
+        Year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companycode != null" >
+        CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkcode != null" >
+        CheckCode = #{record.checkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverydate != null" >
+        DeliveryDate = #{record.deliverydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inspectdate != null" >
+        InspectDate = #{record.inspectdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deliveryperson != null" >
+        DeliveryPerson = #{record.deliveryperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handoverperson != null" >
+        HandoverPerson = #{record.handoverperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handovertime != null" >
+        HandoverTime = #{record.handovertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inspectperson != null" >
+        InspectPerson = #{record.inspectperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inspectstatus != null" >
+        InspectStatus = #{record.inspectstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.path != null" >
+        Path = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_quality
+    set ID = #{record.id,jdbcType=INTEGER},
+      Year = #{record.year,jdbcType=VARCHAR},
+      CompanyCode = #{record.companycode,jdbcType=VARCHAR},
+      CheckCode = #{record.checkcode,jdbcType=VARCHAR},
+      DeliveryDate = #{record.deliverydate,jdbcType=TIMESTAMP},
+      InspectDate = #{record.inspectdate,jdbcType=TIMESTAMP},
+      DeliveryPerson = #{record.deliveryperson,jdbcType=VARCHAR},
+      HandoverPerson = #{record.handoverperson,jdbcType=VARCHAR},
+      HandoverTime = #{record.handovertime,jdbcType=TIMESTAMP},
+      InspectPerson = #{record.inspectperson,jdbcType=VARCHAR},
+      InspectStatus = #{record.inspectstatus,jdbcType=VARCHAR},
+      Path = #{record.path,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BQuality" >
+    update b_quality
+    <set >
+      <if test="year != null" >
+        Year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkcode != null" >
+        CheckCode = #{checkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydate != null" >
+        DeliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inspectdate != null" >
+        InspectDate = #{inspectdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryperson != null" >
+        DeliveryPerson = #{deliveryperson,jdbcType=VARCHAR},
+      </if>
+      <if test="handoverperson != null" >
+        HandoverPerson = #{handoverperson,jdbcType=VARCHAR},
+      </if>
+      <if test="handovertime != null" >
+        HandoverTime = #{handovertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inspectperson != null" >
+        InspectPerson = #{inspectperson,jdbcType=VARCHAR},
+      </if>
+      <if test="inspectstatus != null" >
+        InspectStatus = #{inspectstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        Path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BQuality" >
+    update b_quality
+    set Year = #{year,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR},
+      CheckCode = #{checkcode,jdbcType=VARCHAR},
+      DeliveryDate = #{deliverydate,jdbcType=TIMESTAMP},
+      InspectDate = #{inspectdate,jdbcType=TIMESTAMP},
+      DeliveryPerson = #{deliveryperson,jdbcType=VARCHAR},
+      HandoverPerson = #{handoverperson,jdbcType=VARCHAR},
+      HandoverTime = #{handovertime,jdbcType=TIMESTAMP},
+      InspectPerson = #{inspectperson,jdbcType=VARCHAR},
+      InspectStatus = #{inspectstatus,jdbcType=VARCHAR},
+      Path = #{path,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

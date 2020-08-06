@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BPmaqimonitoringMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BPmaqimonitoring" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MonitorDate" property="monitordate" jdbcType="TIMESTAMP" />
+    <result column="MonitorPointCode" property="monitorpointcode" jdbcType="VARCHAR" />
+    <result column="AQI" property="aqi" jdbcType="REAL" />
+    <result column="AQIName" property="aqiname" jdbcType="VARCHAR" />
+    <result column="PM2_5" property="pm25" jdbcType="REAL" />
+    <result column="PM10" property="pm10" jdbcType="REAL" />
+    <result column="CO" property="co" jdbcType="REAL" />
+    <result column="NO2" property="no2" jdbcType="REAL" />
+    <result column="O3" property="o3" jdbcType="REAL" />
+    <result column="SO2" property="so2" jdbcType="REAL" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MonitorDate, MonitorPointCode, AQI, AQIName, PM2_5, PM10, CO, NO2, O3, SO2, Remark, 
+    DeleteFlag, CreateUserId, CreateDate, UpdateUserId, UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BPmaqimonitoringExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_pmaqimonitoring
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_pmaqimonitoring
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_pmaqimonitoring
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BPmaqimonitoringExample" >
+    delete from b_pmaqimonitoring
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BPmaqimonitoring" >
+    insert into b_pmaqimonitoring (ID, MonitorDate, MonitorPointCode, 
+      AQI, AQIName, PM2_5, PM10, 
+      CO, NO2, O3, SO2, 
+      Remark, DeleteFlag, CreateUserId, 
+      CreateDate, UpdateUserId, UpdateDate
+      )
+    values (#{id,jdbcType=INTEGER}, #{monitordate,jdbcType=TIMESTAMP}, #{monitorpointcode,jdbcType=VARCHAR}, 
+      #{aqi,jdbcType=REAL}, #{aqiname,jdbcType=VARCHAR}, #{pm25,jdbcType=REAL}, #{pm10,jdbcType=REAL}, 
+      #{co,jdbcType=REAL}, #{no2,jdbcType=REAL}, #{o3,jdbcType=REAL}, #{so2,jdbcType=REAL}, 
+      #{remark,jdbcType=VARCHAR}, #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BPmaqimonitoring" >
+    insert into b_pmaqimonitoring
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="monitordate != null" >
+        MonitorDate,
+      </if>
+      <if test="monitorpointcode != null" >
+        MonitorPointCode,
+      </if>
+      <if test="aqi != null" >
+        AQI,
+      </if>
+      <if test="aqiname != null" >
+        AQIName,
+      </if>
+      <if test="pm25 != null" >
+        PM2_5,
+      </if>
+      <if test="pm10 != null" >
+        PM10,
+      </if>
+      <if test="co != null" >
+        CO,
+      </if>
+      <if test="no2 != null" >
+        NO2,
+      </if>
+      <if test="o3 != null" >
+        O3,
+      </if>
+      <if test="so2 != null" >
+        SO2,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="monitordate != null" >
+        #{monitordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorpointcode != null" >
+        #{monitorpointcode,jdbcType=VARCHAR},
+      </if>
+      <if test="aqi != null" >
+        #{aqi,jdbcType=REAL},
+      </if>
+      <if test="aqiname != null" >
+        #{aqiname,jdbcType=VARCHAR},
+      </if>
+      <if test="pm25 != null" >
+        #{pm25,jdbcType=REAL},
+      </if>
+      <if test="pm10 != null" >
+        #{pm10,jdbcType=REAL},
+      </if>
+      <if test="co != null" >
+        #{co,jdbcType=REAL},
+      </if>
+      <if test="no2 != null" >
+        #{no2,jdbcType=REAL},
+      </if>
+      <if test="o3 != null" >
+        #{o3,jdbcType=REAL},
+      </if>
+      <if test="so2 != null" >
+        #{so2,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BPmaqimonitoringExample" resultType="java.lang.Integer" >
+    select count(*) from b_pmaqimonitoring
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_pmaqimonitoring
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.monitordate != null" >
+        MonitorDate = #{record.monitordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.monitorpointcode != null" >
+        MonitorPointCode = #{record.monitorpointcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aqi != null" >
+        AQI = #{record.aqi,jdbcType=REAL},
+      </if>
+      <if test="record.aqiname != null" >
+        AQIName = #{record.aqiname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm25 != null" >
+        PM2_5 = #{record.pm25,jdbcType=REAL},
+      </if>
+      <if test="record.pm10 != null" >
+        PM10 = #{record.pm10,jdbcType=REAL},
+      </if>
+      <if test="record.co != null" >
+        CO = #{record.co,jdbcType=REAL},
+      </if>
+      <if test="record.no2 != null" >
+        NO2 = #{record.no2,jdbcType=REAL},
+      </if>
+      <if test="record.o3 != null" >
+        O3 = #{record.o3,jdbcType=REAL},
+      </if>
+      <if test="record.so2 != null" >
+        SO2 = #{record.so2,jdbcType=REAL},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_pmaqimonitoring
+    set ID = #{record.id,jdbcType=INTEGER},
+      MonitorDate = #{record.monitordate,jdbcType=TIMESTAMP},
+      MonitorPointCode = #{record.monitorpointcode,jdbcType=VARCHAR},
+      AQI = #{record.aqi,jdbcType=REAL},
+      AQIName = #{record.aqiname,jdbcType=VARCHAR},
+      PM2_5 = #{record.pm25,jdbcType=REAL},
+      PM10 = #{record.pm10,jdbcType=REAL},
+      CO = #{record.co,jdbcType=REAL},
+      NO2 = #{record.no2,jdbcType=REAL},
+      O3 = #{record.o3,jdbcType=REAL},
+      SO2 = #{record.so2,jdbcType=REAL},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BPmaqimonitoring" >
+    update b_pmaqimonitoring
+    <set >
+      <if test="monitordate != null" >
+        MonitorDate = #{monitordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monitorpointcode != null" >
+        MonitorPointCode = #{monitorpointcode,jdbcType=VARCHAR},
+      </if>
+      <if test="aqi != null" >
+        AQI = #{aqi,jdbcType=REAL},
+      </if>
+      <if test="aqiname != null" >
+        AQIName = #{aqiname,jdbcType=VARCHAR},
+      </if>
+      <if test="pm25 != null" >
+        PM2_5 = #{pm25,jdbcType=REAL},
+      </if>
+      <if test="pm10 != null" >
+        PM10 = #{pm10,jdbcType=REAL},
+      </if>
+      <if test="co != null" >
+        CO = #{co,jdbcType=REAL},
+      </if>
+      <if test="no2 != null" >
+        NO2 = #{no2,jdbcType=REAL},
+      </if>
+      <if test="o3 != null" >
+        O3 = #{o3,jdbcType=REAL},
+      </if>
+      <if test="so2 != null" >
+        SO2 = #{so2,jdbcType=REAL},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BPmaqimonitoring" >
+    update b_pmaqimonitoring
+    set MonitorDate = #{monitordate,jdbcType=TIMESTAMP},
+      MonitorPointCode = #{monitorpointcode,jdbcType=VARCHAR},
+      AQI = #{aqi,jdbcType=REAL},
+      AQIName = #{aqiname,jdbcType=VARCHAR},
+      PM2_5 = #{pm25,jdbcType=REAL},
+      PM10 = #{pm10,jdbcType=REAL},
+      CO = #{co,jdbcType=REAL},
+      NO2 = #{no2,jdbcType=REAL},
+      O3 = #{o3,jdbcType=REAL},
+      SO2 = #{so2,jdbcType=REAL},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

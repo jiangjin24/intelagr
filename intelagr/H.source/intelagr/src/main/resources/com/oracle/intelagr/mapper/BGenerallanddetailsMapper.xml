@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oracle.intelagr.mapper.BGenerallanddetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.oracle.intelagr.entity.BGenerallanddetails" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="HID" property="hid" jdbcType="INTEGER" />
+    <result column="LandType" property="landtype" jdbcType="VARCHAR" />
+    <result column="ActualMu" property="actualmu" jdbcType="REAL" />
+    <result column="MeasurementMu" property="measurementmu" jdbcType="REAL" />
+    <result column="LandClass" property="landclass" jdbcType="VARCHAR" />
+    <result column="LandName" property="landname" jdbcType="VARCHAR" />
+    <result column="CityCode" property="citycode" jdbcType="VARCHAR" />
+    <result column="TownCode" property="towncode" jdbcType="VARCHAR" />
+    <result column="CountryCode" property="countrycode" jdbcType="VARCHAR" />
+    <result column="GroupName" property="groupname" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="DeleteFlag" property="deleteflag" jdbcType="VARCHAR" />
+    <result column="CreateUserId" property="createuserid" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="UpdateUserId" property="updateuserid" jdbcType="VARCHAR" />
+    <result column="UpdateDate" property="updatedate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, HID, LandType, ActualMu, MeasurementMu, LandClass, LandName, CityCode, TownCode, 
+    CountryCode, GroupName, Remark, DeleteFlag, CreateUserId, CreateDate, UpdateUserId, 
+    UpdateDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.oracle.intelagr.entity.BGenerallanddetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from b_generallanddetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_generallanddetails
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_generallanddetails
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.oracle.intelagr.entity.BGenerallanddetailsExample" >
+    delete from b_generallanddetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.oracle.intelagr.entity.BGenerallanddetails" >
+    insert into b_generallanddetails (ID, HID, LandType, 
+      ActualMu, MeasurementMu, LandClass, 
+      LandName, CityCode, TownCode, 
+      CountryCode, GroupName, Remark, 
+      DeleteFlag, CreateUserId, CreateDate, 
+      UpdateUserId, UpdateDate)
+    values (#{id,jdbcType=INTEGER}, #{hid,jdbcType=INTEGER}, #{landtype,jdbcType=VARCHAR}, 
+      #{actualmu,jdbcType=REAL}, #{measurementmu,jdbcType=REAL}, #{landclass,jdbcType=VARCHAR}, 
+      #{landname,jdbcType=VARCHAR}, #{citycode,jdbcType=VARCHAR}, #{towncode,jdbcType=VARCHAR}, 
+      #{countrycode,jdbcType=VARCHAR}, #{groupname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deleteflag,jdbcType=VARCHAR}, #{createuserid,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{updateuserid,jdbcType=VARCHAR}, #{updatedate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.oracle.intelagr.entity.BGenerallanddetails" >
+    insert into b_generallanddetails
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="hid != null" >
+        HID,
+      </if>
+      <if test="landtype != null" >
+        LandType,
+      </if>
+      <if test="actualmu != null" >
+        ActualMu,
+      </if>
+      <if test="measurementmu != null" >
+        MeasurementMu,
+      </if>
+      <if test="landclass != null" >
+        LandClass,
+      </if>
+      <if test="landname != null" >
+        LandName,
+      </if>
+      <if test="citycode != null" >
+        CityCode,
+      </if>
+      <if test="towncode != null" >
+        TownCode,
+      </if>
+      <if test="countrycode != null" >
+        CountryCode,
+      </if>
+      <if test="groupname != null" >
+        GroupName,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag,
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId,
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null" >
+        #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="landtype != null" >
+        #{landtype,jdbcType=VARCHAR},
+      </if>
+      <if test="actualmu != null" >
+        #{actualmu,jdbcType=REAL},
+      </if>
+      <if test="measurementmu != null" >
+        #{measurementmu,jdbcType=REAL},
+      </if>
+      <if test="landclass != null" >
+        #{landclass,jdbcType=VARCHAR},
+      </if>
+      <if test="landname != null" >
+        #{landname,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null" >
+        #{countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.oracle.intelagr.entity.BGenerallanddetailsExample" resultType="java.lang.Integer" >
+    select count(*) from b_generallanddetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update b_generallanddetails
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hid != null" >
+        HID = #{record.hid,jdbcType=INTEGER},
+      </if>
+      <if test="record.landtype != null" >
+        LandType = #{record.landtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actualmu != null" >
+        ActualMu = #{record.actualmu,jdbcType=REAL},
+      </if>
+      <if test="record.measurementmu != null" >
+        MeasurementMu = #{record.measurementmu,jdbcType=REAL},
+      </if>
+      <if test="record.landclass != null" >
+        LandClass = #{record.landclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.landname != null" >
+        LandName = #{record.landname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citycode != null" >
+        CityCode = #{record.citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.towncode != null" >
+        TownCode = #{record.towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countrycode != null" >
+        CountryCode = #{record.countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupname != null" >
+        GroupName = #{record.groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteflag != null" >
+        DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createuserid != null" >
+        CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateuserid != null" >
+        UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatedate != null" >
+        UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update b_generallanddetails
+    set ID = #{record.id,jdbcType=INTEGER},
+      HID = #{record.hid,jdbcType=INTEGER},
+      LandType = #{record.landtype,jdbcType=VARCHAR},
+      ActualMu = #{record.actualmu,jdbcType=REAL},
+      MeasurementMu = #{record.measurementmu,jdbcType=REAL},
+      LandClass = #{record.landclass,jdbcType=VARCHAR},
+      LandName = #{record.landname,jdbcType=VARCHAR},
+      CityCode = #{record.citycode,jdbcType=VARCHAR},
+      TownCode = #{record.towncode,jdbcType=VARCHAR},
+      CountryCode = #{record.countrycode,jdbcType=VARCHAR},
+      GroupName = #{record.groupname,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      DeleteFlag = #{record.deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{record.createuserid,jdbcType=VARCHAR},
+      CreateDate = #{record.createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{record.updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{record.updatedate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.oracle.intelagr.entity.BGenerallanddetails" >
+    update b_generallanddetails
+    <set >
+      <if test="hid != null" >
+        HID = #{hid,jdbcType=INTEGER},
+      </if>
+      <if test="landtype != null" >
+        LandType = #{landtype,jdbcType=VARCHAR},
+      </if>
+      <if test="actualmu != null" >
+        ActualMu = #{actualmu,jdbcType=REAL},
+      </if>
+      <if test="measurementmu != null" >
+        MeasurementMu = #{measurementmu,jdbcType=REAL},
+      </if>
+      <if test="landclass != null" >
+        LandClass = #{landclass,jdbcType=VARCHAR},
+      </if>
+      <if test="landname != null" >
+        LandName = #{landname,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null" >
+        CityCode = #{citycode,jdbcType=VARCHAR},
+      </if>
+      <if test="towncode != null" >
+        TownCode = #{towncode,jdbcType=VARCHAR},
+      </if>
+      <if test="countrycode != null" >
+        CountryCode = #{countrycode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null" >
+        GroupName = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteflag != null" >
+        DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      </if>
+      <if test="createuserid != null" >
+        CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuserid != null" >
+        UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        UpdateDate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.oracle.intelagr.entity.BGenerallanddetails" >
+    update b_generallanddetails
+    set HID = #{hid,jdbcType=INTEGER},
+      LandType = #{landtype,jdbcType=VARCHAR},
+      ActualMu = #{actualmu,jdbcType=REAL},
+      MeasurementMu = #{measurementmu,jdbcType=REAL},
+      LandClass = #{landclass,jdbcType=VARCHAR},
+      LandName = #{landname,jdbcType=VARCHAR},
+      CityCode = #{citycode,jdbcType=VARCHAR},
+      TownCode = #{towncode,jdbcType=VARCHAR},
+      CountryCode = #{countrycode,jdbcType=VARCHAR},
+      GroupName = #{groupname,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      DeleteFlag = #{deleteflag,jdbcType=VARCHAR},
+      CreateUserId = #{createuserid,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      UpdateUserId = #{updateuserid,jdbcType=VARCHAR},
+      UpdateDate = #{updatedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
